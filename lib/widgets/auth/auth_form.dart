@@ -10,8 +10,11 @@ class AuthForm extends StatefulWidget {
   final bool isLoading;
   final void Function(
     String email,
-    String password,
     String userName,
+    String phoneNumber,
+    String address,
+    String role,
+    String password,
     File image,
     bool isLogin,
     BuildContext ctx,
@@ -25,7 +28,11 @@ class _AuthFormState extends State<AuthForm> {
   var _isLogin = true;
   var _userEmail = '';
   var _userName = '';
+  var _userPhoneNumber = '';
+  var _useraddress = '';
+  var _userrole = '';
   var _userPassword = '';
+
   File _userImageFile;
 
   void _pickedImage(File image) {
@@ -50,8 +57,11 @@ class _AuthFormState extends State<AuthForm> {
       _formkey.currentState.save();
       widget.submitFn(
         _userEmail.trim(),
-        _userPassword.trim(),
         _userName.trim(),
+        _userPhoneNumber,
+        _useraddress,
+        _userrole,
+        _userPassword.trim(),
         _userImageFile,
         _isLogin,
         context,
@@ -91,7 +101,7 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   if (!_isLogin)
                     TextFormField(
-                      key: ValueKey('username'),
+                      key: ValueKey('userName'),
                       validator: (value) {
                         if (value.isEmpty || value.length < 4) {
                           return 'Please enter atleast 4 characters.';
@@ -101,6 +111,51 @@ class _AuthFormState extends State<AuthForm> {
                       decoration: InputDecoration(labelText: 'Username'),
                       onSaved: (value) {
                         _userName = value;
+                      },
+                    ),
+                  if (!_isLogin)
+                    TextFormField(
+                      key: ValueKey('phoneNumber'),
+                      validator: (value) {
+                        if (value.isEmpty ||
+                            value.length < 10 ||
+                            value.length > 10) {
+                          return 'Please enter a valid number';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(labelText: 'Phone number'),
+                      onSaved: (value) {
+                        _userPhoneNumber = value;
+                      },
+                    ),
+                  if (!_isLogin)
+                    TextFormField(
+                      key: ValueKey('address'),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter a valid address';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(labelText: 'Address'),
+                      onSaved: (value) {
+                        _useraddress = value;
+                      },
+                    ),
+                  if (!_isLogin)
+                    TextFormField(
+                      key: ValueKey('role'),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter worker or employer';
+                        }
+                        return null;
+                      },
+                      decoration:
+                          InputDecoration(labelText: 'Role(worker/employer)'),
+                      onSaved: (value) {
+                        _userrole = value;
                       },
                     ),
                   TextFormField(

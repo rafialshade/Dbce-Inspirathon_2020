@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             if (userSnapshot.hasData) {
               return FirstPage(); //first page
               //if the user is already loged in then he goes to home page
-              //idk why i cant use main screen it gives an error maybe cuz u taking values from php thing
+
             }
             return AuthScreen();
             //if the token expired then welcome page

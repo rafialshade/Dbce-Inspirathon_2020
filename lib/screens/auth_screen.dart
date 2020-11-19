@@ -16,8 +16,11 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLoading = false;
   void _submitAuthForm(
     String email,
-    String password,
     String username,
+    String phonenumber,
+    String address,
+    String role,
+    String password,
     File image,
     bool isLogin,
     BuildContext ctx,
@@ -54,6 +57,9 @@ class _AuthScreenState extends State<AuthScreen> {
           'username': username,
           'email': email,
           'image_url': url,
+          'phoneNumber': phonenumber,
+          'address': address,
+          'role': role,
         });
       }
     } on PlatformException catch (err) {
